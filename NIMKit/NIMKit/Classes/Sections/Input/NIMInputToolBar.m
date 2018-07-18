@@ -78,7 +78,12 @@
         _bottomSep = [[UIView alloc] initWithFrame:CGRectZero];
         _bottomSep.backgroundColor = [UIColor lightGrayColor];
         [self addSubview:_bottomSep];
+
+        // roy.wu 2018.7 隐藏分割线
+        sep.hidden = YES;
+        _bottomSep.hidden = YES;
         
+
         self.types = @[
                          @(NIMInputBarItemTypeVoice),
                          @(NIMInputBarItemTypeTextAndRecord),
@@ -141,7 +146,10 @@
         textViewWidth += view.nim_width;
     }
     textViewWidth += (self.spacing * (self.types.count + 1));
-    self.inputTextView.nim_width  = width  - textViewWidth - 2 * self.textViewPadding;
+//     roy.wu 2018.7 间距调整
+//    self.inputTextView.nim_width  = width  - textViewWidth - 2 * self.textViewPadding;
+    self.inputTextView.nim_width  = width  - textViewWidth - 2 * self.textViewPaddingWidth;
+
 }
 
 
@@ -149,8 +157,11 @@
     [super layoutSubviews];
     
     if ([self.types containsObject:@(NIMInputBarItemTypeTextAndRecord)]) {
-        self.inputTextBkgImage.nim_width  = self.inputTextView.nim_width  + 2 * self.textViewPadding;
-        self.inputTextBkgImage.nim_height = self.inputTextView.nim_height + 2 * self.textViewPadding;
+        // roy.wu 2018.7 间距调整
+//        self.inputTextBkgImage.nim_width  = self.inputTextView.nim_width  + 2 * self.textViewPadding;
+//        self.inputTextBkgImage.nim_height = self.inputTextView.nim_height + 2 * self.textViewPadding;
+        self.inputTextBkgImage.nim_width  = self.inputTextView.nim_width  + 2 * self.textViewPaddingWidth;
+        self.inputTextBkgImage.nim_height = self.inputTextView.nim_height + (self.textViewPadding < 0 ? 0 : 2 * self.textViewPadding);
     }
     CGFloat left = 0;
     for (NSNumber *type in self.types) {
@@ -328,7 +339,11 @@
 
 - (CGFloat)textViewPadding
 {
-    return 3.f;
+    return -2.f;// roy.wu 2018.7 间距调整
+}
+// roy.wu 2018.7 间距调整
+- (CGFloat)textViewPaddingWidth {
+    return 2.f;
 }
 
 

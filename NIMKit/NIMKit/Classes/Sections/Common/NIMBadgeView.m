@@ -9,6 +9,7 @@
 
 #import "NIMBadgeView.h"
 #import "NSString+NIMKit.h"
+#import "NIMGlobalMacro.h"
 
 @interface NIMBadgeView ()
 
@@ -43,10 +44,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor  = [UIColor clearColor];
-        _badgeBackgroundColor = [UIColor redColor];
+        _badgeBackgroundColor = NIMKit_UIColorFromRGB(0xFF5959);
         _badgeTextColor       = [UIColor whiteColor];
-        _badgeTextFont        = [UIFont boldSystemFontOfSize:12];
-        _whiteCircleWidth     = 2.f;
+        _badgeTextFont        = [UIFont systemFontOfSize:10];
+        _whiteCircleWidth     = 0.f;
     }
     return self;
 }
@@ -67,9 +68,9 @@
 - (void)setBadgeValue:(NSString *)badgeValue {
     _badgeValue = badgeValue;
     if (_badgeValue.integerValue > 9) {
-       _badgeLeftPadding     = 6.f;
+       _badgeLeftPadding     = 0.f;
     }else{
-       _badgeLeftPadding     = 2.f;
+       _badgeLeftPadding     = 0.f;
     }
     _badgeTopPadding      = 2.f;
 
@@ -104,7 +105,7 @@
     CGRect bkgFrame = CGRectInset(self.bounds, self.whiteCircleWidth, self.whiteCircleWidth);
     CGRect badgeSize = CGRectInset(self.bounds, self.whiteCircleWidth + self.badgeLeftPadding, self.whiteCircleWidth + self.badgeTopPadding);
     if ([self badgeBackgroundColor]) {//外白色描边
-        CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+        CGContextSetFillColorWithColor(context, [NIMKit_UIColorFromRGB(0xFF5959) CGColor]);
         if ([self badgeValue].integerValue > 9) {
             CGFloat circleWith = bodyFrame.size.height;
             CGFloat totalWidth = bodyFrame.size.width;
@@ -158,7 +159,7 @@
 
 - (void)drawWithOutContent:(CGRect)rect context:(CGContextRef)context{
     CGRect bodyFrame = self.bounds;
-    CGContextSetFillColorWithColor(context, [[UIColor redColor] CGColor]);
+    CGContextSetFillColorWithColor(context, [NIMKit_UIColorFromRGB(0xFF5959) CGColor]);
     CGContextFillEllipseInRect(context, bodyFrame);
 }
 

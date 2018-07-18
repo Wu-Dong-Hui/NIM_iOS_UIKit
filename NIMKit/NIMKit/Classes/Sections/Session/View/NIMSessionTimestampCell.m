@@ -30,8 +30,8 @@
         _timeBGView = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self addSubview:_timeBGView];
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _timeLabel.font = [UIFont boldSystemFontOfSize:10.f];
-        _timeLabel.textColor = [UIColor whiteColor];
+        _timeLabel.font = [UIFont systemFontOfSize:12];
+        _timeLabel.textColor = NIMKit_UIColorFromRGB(0x999999);
         [self addSubview:_timeLabel];
         [_timeBGView setImage:[[UIImage nim_imageInKit:@"icon_session_time_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(8,20,8,20) resizingMode:UIImageResizingModeStretch]];
 
@@ -52,7 +52,7 @@
     self.model = data;
     if([self checkData]){
         NIMTimestampModel *model = (NIMTimestampModel *)data;
-        [_timeLabel setText:[NIMKitUtil showTime:model.messageTime showDetail:YES]];
+        [_timeLabel setText:[NIMKitUtil showTime:model.messageTime]];
     }
 }
 

@@ -18,14 +18,16 @@
     {
         if (isRight)
         {
-            _normalBackgroundImage    =  [[UIImage nim_imageInKit:@"icon_sender_text_node_normal"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{18,25,17,25}") resizingMode:UIImageResizingModeStretch];
-            _highLightBackgroundImage =  [[UIImage nim_imageInKit:@"icon_sender_text_node_pressed"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{18,25,17,25}") resizingMode:UIImageResizingModeStretch];
+            // roy.wu 2018.7 气泡图片拉伸
+            _normalBackgroundImage    =  [[UIImage nim_imageInKit:@"icon_sender_text_node_normal"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{30,20,20,30}") resizingMode:UIImageResizingModeStretch];
+            _highLightBackgroundImage =  [[UIImage nim_imageInKit:@"icon_sender_text_node_pressed"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{30,20,20,30}") resizingMode:UIImageResizingModeStretch];
             
         }
         else
         {
-            _normalBackgroundImage    =  [[UIImage nim_imageInKit:@"icon_receiver_node_normal"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{18,25,17,25}") resizingMode:UIImageResizingModeStretch];
-            _highLightBackgroundImage =  [[UIImage nim_imageInKit:@"icon_receiver_node_pressed"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{18,25,17,25}") resizingMode:UIImageResizingModeStretch];
+            // roy.wu 2018.7 气泡图片拉伸
+            _normalBackgroundImage    =  [[UIImage nim_imageInKit:@"icon_receiver_node_normal"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{30,20,20,30}") resizingMode:UIImageResizingModeStretch];
+            _highLightBackgroundImage =  [[UIImage nim_imageInKit:@"icon_receiver_node_pressed"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{30,20,20,30}") resizingMode:UIImageResizingModeStretch];
         }
     }
     return self;

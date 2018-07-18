@@ -16,6 +16,8 @@
 
 + (NSString *)showNick:(NSString *)uid inSession:(NIMSession *)session;
 
++ (NSString *)showTime:(NSTimeInterval)msglastTime;
+
 + (NSString *)showTime:(NSTimeInterval)msglastTime showDetail:(BOOL)showDetail;
 
 + (NSString *)messageTipContent:(NIMMessage *)message;

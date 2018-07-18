@@ -61,4 +61,15 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
+// roy.wu 2018.7
+// nsstring 在固定的高度下得到宽度
+- (CGFloat)widthWith:(int)fontsize   {
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:fontsize] forKey:NSFontAttributeName];
+    
+    CGSize size = [self boundingRectWithSize:CGSizeMake(MAXFLOAT , 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+    return size.width;
+}
+
 @end

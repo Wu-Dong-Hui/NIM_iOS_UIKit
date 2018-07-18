@@ -17,6 +17,7 @@
 
 @implementation NIMMessageModel
 
+@synthesize contentSize        = _contentSize;//roy.wu 2018.7
 @synthesize contentViewInsets  = _contentViewInsets;
 @synthesize bubbleViewInsets   = _bubbleViewInsets;
 @synthesize shouldShowAvatar   = _shouldShowAvatar;
@@ -39,6 +40,7 @@
 
 - (void)cleanCache
 {
+    _contentSize = CGSizeZero;//roy.wu 2018.7
     [_contentSizeInfo removeAllObjects];
     _contentViewInsets = UIEdgeInsetsZero;
     _bubbleViewInsets = UIEdgeInsetsZero;
@@ -68,6 +70,7 @@
     {
         [self updateLayoutConfig];
         id<NIMCellLayoutConfig> layoutConfig = [[NIMKit sharedKit] layoutConfig];
+        _contentSize = [layoutConfig contentSize:self cellWidth:width];//roy.wu 2018.7
         size = [layoutConfig contentSize:self cellWidth:width];
         [self.contentSizeInfo setObject:[NSValue valueWithCGSize:size] forKey:@(width)];
     }

@@ -166,4 +166,11 @@
  */
 - (void)uiUpdateMessage:(NIMMessage *)message;
 
+// roy.wu 2018.7
+- (void)onTapMediaItemPicture:(NIMMediaItem *)item;
+
+- (void)onTapMediaItemShoot:(NIMMediaItem *)item;
+
+- (void)onTapMediaItemLocation:(NIMMediaItem *)item;
+
 @end

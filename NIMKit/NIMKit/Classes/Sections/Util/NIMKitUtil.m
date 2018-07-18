@@ -49,6 +49,36 @@
 }
 
 
++ (NSString *)showTime:(NSTimeInterval)msglastTime
+{
+    //今天的时间
+    NSDate * nowDate = [NSDate date];
+    NSDate * msgDate = [NSDate dateWithTimeIntervalSince1970:msglastTime];
+    NSString *result = nil;
+    NSCalendarUnit components = (NSCalendarUnit)(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitHour | NSCalendarUnitMinute);
+    NSDateComponents *nowDateComponents = [[NSCalendar currentCalendar] components:components fromDate:nowDate];
+    NSDateComponents *msgDateComponents = [[NSCalendar currentCalendar] components:components fromDate:msgDate];
+    
+    NSInteger hour = msgDateComponents.hour;
+    
+    result = @"";
+    
+    if(nowDateComponents.day == msgDateComponents.day) //同一天,显示时间
+    {
+        result = [[NSString alloc] initWithFormat:@"%@ %zd:%02d",result,hour,(int)msgDateComponents.minute];
+    }
+    else if(nowDateComponents.day == (msgDateComponents.day+1))//昨天
+    {
+        result = [[NSString alloc] initWithFormat:@"昨天%@ %zd:%02d",result,hour,(int)msgDateComponents.minute];
+    }
+    else//显示日期
+    {
+        NSString *day = [NSString stringWithFormat:@"%zd年%zd月%zd日", msgDateComponents.year, msgDateComponents.month, msgDateComponents.day];
+        result = [day stringByAppendingFormat:@"%@ %zd:%02d",result,hour,(int)msgDateComponents.minute];
+    }
+    return result;
+}
+
 + (NSString*)showTime:(NSTimeInterval) msglastTime showDetail:(BOOL)showDetail
 {
     //今天的时间
@@ -60,37 +90,26 @@
     NSDateComponents *msgDateComponents = [[NSCalendar currentCalendar] components:components fromDate:msgDate];
     
     NSInteger hour = msgDateComponents.hour;
-    double OnedayTimeIntervalValue = 24*60*60;  //一天的秒数
-
-    result = [NIMKitUtil getPeriodOfTime:hour withMinute:msgDateComponents.minute];
-    if (hour > 12)
-    {
-        hour = hour - 12;
-    }
     
-    BOOL isSameMonth = (nowDateComponents.year == msgDateComponents.year) && (nowDateComponents.month == msgDateComponents.month);
+    result = @"";
     
-    if(isSameMonth && (nowDateComponents.day == msgDateComponents.day)) //同一天,显示时间
+    if(nowDateComponents.day == msgDateComponents.day) //同一天,显示时间
     {
         result = [[NSString alloc] initWithFormat:@"%@ %zd:%02d",result,hour,(int)msgDateComponents.minute];
     }
-    else if(isSameMonth && (nowDateComponents.day == (msgDateComponents.day+1)))//昨天
+    else if(nowDateComponents.day == (msgDateComponents.day+1))//昨天
     {
         result = showDetail?  [[NSString alloc] initWithFormat:@"昨天%@ %zd:%02d",result,hour,(int)msgDateComponents.minute] : @"昨天";
     }
-    else if(isSameMonth && (nowDateComponents.day == (msgDateComponents.day+2))) //前天
-    {
-        result = showDetail? [[NSString alloc] initWithFormat:@"前天%@ %zd:%02d",result,hour,(int)msgDateComponents.minute] : @"前天";
-    }
-    else if([nowDate timeIntervalSinceDate:msgDate] < 7 * OnedayTimeIntervalValue)//一周内
-    {
-        NSString *weekDay = [NIMKitUtil weekdayStr:msgDateComponents.weekday];
-        result = showDetail? [weekDay stringByAppendingFormat:@"%@ %zd:%02d",result,hour,(int)msgDateComponents.minute] : weekDay;
-    }
     else//显示日期
     {
-        NSString *day = [NSString stringWithFormat:@"%zd-%zd-%zd", msgDateComponents.year, msgDateComponents.month, msgDateComponents.day];
-        result = showDetail? [day stringByAppendingFormat:@"%@ %zd:%02d",result,hour,(int)msgDateComponents.minute]:day;
+        if (nowDateComponents.year != msgDateComponents.year) {
+            NSString *day = [NSString stringWithFormat:@"%zd年%zd月%zd日", msgDateComponents.year, msgDateComponents.month, msgDateComponents.day];
+            result = showDetail? [day stringByAppendingFormat:@"%@ %zd:%02d",result,hour,(int)msgDateComponents.minute]:day;
+        } else {
+            NSString *day = [NSString stringWithFormat:@"%zd月%zd日", msgDateComponents.month, msgDateComponents.day];
+            result = showDetail? [day stringByAppendingFormat:@"%@ %zd:%02d",result,hour,(int)msgDateComponents.minute]:day;
+        }
     }
     return result;
 }

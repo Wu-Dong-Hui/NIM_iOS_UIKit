@@ -26,6 +26,7 @@
  */
 @property (nonatomic,readonly) NSTimeInterval messageTime;
 
+@property (nonatomic, readonly) CGSize     contentSize;//roy.wu 2018.7
 
 @property (nonatomic, readonly) UIEdgeInsets  contentViewInsets;
 

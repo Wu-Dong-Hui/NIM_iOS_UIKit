@@ -63,7 +63,7 @@
     _retryButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_retryButton setImage:NIMRetryButtonImage forState:UIControlStateNormal];
     [_retryButton setImage:NIMRetryButtonImage forState:UIControlStateHighlighted];
-    [_retryButton setFrame:CGRectMake(0, 0, 20, 20)];
+    [_retryButton setFrame:CGRectMake(0, 0, 16, 16)];
     [_retryButton addTarget:self action:@selector(onRetryMessage:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:_retryButton];
     
@@ -73,6 +73,7 @@
     
     //traningActivityIndicator
     _traningActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0,0,20,20)];
+    _traningActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     [self.contentView addSubview:_traningActivityIndicator];
     
     //headerView
@@ -411,7 +412,7 @@
     if (self.model.message.messageType == NIMMessageTypeAudio) {
         return isFromMe ? 15 : 13;
     }
-    return isFromMe ? 8 : 10;
+    return isFromMe ? 5 : 5;
 }
 
 - (BOOL)activityIndicatorHidden
@@ -460,7 +461,7 @@
 }
 
 - (CGFloat)readButtonBubblePadding{
-    return 2.0;
+    return 5.0;
 }
 
 - (CGPoint)cellPaddingToAvatar

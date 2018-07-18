@@ -20,4 +20,7 @@
 
 - (UIColor *)nim_hexToColor;
 
+// roy.wu 2018.7
+// nsstring 在固定的高度下得到宽度
+- (CGFloat)widthWith:(int)fontsize;
 @end

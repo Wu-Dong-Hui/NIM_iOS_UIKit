@@ -11,9 +11,10 @@
 #import "NIMMediaItem.h"
 #import "UIView+NIM.h"
 #import "NIMKit.h"
+#import "NIMGlobalMacro.h"
 
 NSInteger NIMMaxItemCountInPage = 8;
-NSInteger NIMButtonItemWidth = 75;
+NSInteger NIMButtonItemWidth = 60;
 NSInteger NIMButtonItemHeight = 85;
 NSInteger NIMPageRowCount     = 2;
 NSInteger NIMPageColumnCount  = 4;
@@ -79,11 +80,14 @@ NSInteger NIMButtonBegintLeftX = 11;
         btn.tag = idx;
         [btn setImage:item.normalImage forState:UIControlStateNormal];
         [btn setImage:item.selectedImage forState:UIControlStateHighlighted];
-        [btn setTitle:item.title forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(76, -75, 0, 0)];
-        [btn.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
-        btn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        // roy.wu 2018.7 更多view UI间距
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(5, 0, 0, 0)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(-10, 82, NIMButtonItemWidth + 20, 20)];
+        [btn addSubview:label];
+        label.font = [UIFont systemFontOfSize:14];
+        label.textColor = NIMKit_UIColorFromRGB(0x999999);
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = item.title;
         [mediaButtons addObject:btn];
 
     }];
